@@ -127,7 +127,7 @@ const DECK = [
 
 /**
  * Returns the relative path to the image file for a card.
- * Naming convention in /images/:
+ * Naming convention in /resources/:
  *   {number}{Color}{Shape}.jpg   (singular, n=1)
  *   {number}{Color}{Shapes}.jpg  (plural,  n>1)
  */
@@ -138,7 +138,7 @@ function cardImage(n, c, s) {
     cross:    n === 1 ? 'Cross'    : 'Crosses',
     dot:      n === 1 ? 'Dot'      : 'Dots',
   };
-  return `images/${n}${c}${shapeNames[s]}.jpg`;
+  return `resources/${n}${c}${shapeNames[s]}.jpg`;
 }
 
 /**
