@@ -316,15 +316,9 @@ async function updateInfo() {
 
 async function experimentInit() {
   // ── Window ──────────────────────────────────────────────
-  psychoJS.window = new visual.Window({
-    width:        screen.width,
-    height:       screen.height,
+  psychoJS.openWindow({
     fullscr:      true,
-    screen:       0,
-    allowGUI:     true,
-    allowStencil: false,
     color:        new util.Color([-0.1, -0.1, -0.1]), // dark-grey background
-    colorSpace:   'rgb',
     units:        'height',
     waitBlanking: true,
   });
@@ -709,7 +703,9 @@ function endEnd() {
 // ─────────────────────────────────────────────────────────────
 
 function quitPsychoJS() {
-  psychoJS.window.close();
+  if (psychoJS.window) {
+    psychoJS.window.close();
+  }
   psychoJS.quit({ message: 'Experiment complete', isCompleted: true });
   return Scheduler.Event.QUIT;
 }
