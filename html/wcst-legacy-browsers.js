@@ -14,8 +14,7 @@
  * Built with PsychoJS 2022.2.4
  */
 
-import { core, data, util, visual }
-  from './lib/psychojs-2022.2.4.js';
+
 
 const { PsychoJS } = core;
 const { TrialHandler } = data;
