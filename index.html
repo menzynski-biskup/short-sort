@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Wisconsin Card Sorting Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <!-- PsychoJS 2022.2.4 from Pavlovia CDN -->
+    <link rel="stylesheet" href="https://lib.pavlovia.org/psychojs-2022.2.4.css">
+    <!-- vendors must load before the ES-module experiment script -->
+    <script type="text/javascript" src="https://lib.pavlovia.org/vendors-2022.2.4.js"></script>
+    <style>
+      html, body {
+        margin: 0; padding: 0;
+        background: #808080;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+      wcst.js is an ES module that imports PsychoJS from the Pavlovia CDN.
+      Regular scripts (vendors) execute before deferred module scripts,
+      so the third-party globals are available when PsychoJS is imported.
+    -->
+    <script type="module" src="wcst.js"></script>
+  </body>
+</html>
