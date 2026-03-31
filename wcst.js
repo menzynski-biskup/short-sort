@@ -210,9 +210,23 @@ const resources = [..._imageSet].map(f => ({ name: f, path: f }));
 // ── PsychoJS instance ──────────────────────────────────────
 const psychoJS = new PsychoJS({ debug: false });
 
-// ── Scheduler (no dialog — params come from URL) ───────────
-const flowScheduler = new Scheduler(psychoJS);
-psychoJS.schedule(flowScheduler);
+// ── Dialog (shows participant-info fields, resource-loading bar,
+//    "All resources downloaded" status, and OK button — required
+//    for Pavlovia to initialise correctly) ───────────────────
+psychoJS.schedule(psychoJS.gui.DlgFromDict({
+  dictionary: expInfo,
+  title: expName,
+}));
+
+const flowScheduler        = new Scheduler(psychoJS);
+const dialogCancelScheduler = new Scheduler(psychoJS);
+
+// Only run the experiment if the participant clicked OK
+psychoJS.scheduleCondition(
+  function() { return (psychoJS.gui.dialogComponent.button === 'OK'); },
+  flowScheduler,
+  dialogCancelScheduler,
+);
 
 flowScheduler.add(updateInfo);
 flowScheduler.add(experimentInit);
@@ -234,6 +248,9 @@ flowScheduler.add(endEachFrame);
 flowScheduler.add(endEnd);
 
 flowScheduler.add(quitPsychoJS);
+
+// If the participant cancels the dialog, quit gracefully
+dialogCancelScheduler.add(quitPsychoJS);
 
 // Kick off resource loading and Pavlovia connection
 psychoJS.start({ expName: expName, expInfo: expInfo, resources: resources });
